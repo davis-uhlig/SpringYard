@@ -33,14 +33,14 @@ public class CustomerServiceTest {
         customer1.setLastname(lastName);
         customer1.setPhone(phone);
         customer1.setEmail(email);
-        customerRepository.add(customer1);
+        customerRepository.save(customer1);
 
-        List<Customer> customers = customerRepository.get();
+        List<Customer> customers = customerRepository.findAll();
 
         Customer customer2 = findInList(customers, firstName, lastName, phone, email);
         Assert.assertNotNull(customer2);
 
-        Customer customer3 = customerRepository.getById(customer2.getId());
+        Customer customer3 = customerRepository.getOne(customer2.getId());
         Assert.assertNotNull(customer3);
         Assert.assertEquals(firstName, customer3.getFirstname());
         Assert.assertEquals(lastName, customer3.getLastname());
@@ -61,9 +61,9 @@ public class CustomerServiceTest {
         customer1.setLastname(lastName);
         customer1.setPhone(phone);
         customer1.setEmail(email);
-        customerRepository.add(customer1);
+        customerRepository.save(customer1);
 
-        List<Customer> customers = customerRepository.get();
+        List<Customer> customers = customerRepository.findAll();
 
         Customer customer2 = findInList(customers, customer1.getFirstname(), customer1.getLastname(), customer1.getPhone(), customer1.getEmail());
         Assert.assertNotNull(customer2);
@@ -77,9 +77,9 @@ public class CustomerServiceTest {
         customer2.setLastname(updateLastName);
         customer2.setPhone(updatePhone);
         customer2.setEmail(updateEmail);
-        customerRepository.update(customer2);
+        customerRepository.save(customer2);
 
-        customers = customerRepository.get();
+        customers = customerRepository.findAll();
 
         Customer customer3 = findInList(customers, updateFirstName, updateLastName, updatePhone, updateEmail);
         Assert.assertNotNull(customer3);
@@ -99,16 +99,16 @@ public class CustomerServiceTest {
         customer1.setPhone(phone);
         customer1.setEmail(email);
 
-        customerRepository.add(customer1);
+        customerRepository.save(customer1);
 
-        List<Customer> customers = customerRepository.get();
+        List<Customer> customers = customerRepository.findAll();
 
         Customer customer2 = findInList(customers, customer1.getFirstname(), customer1.getLastname(), customer1.getPhone(), customer1.getEmail());
         Assert.assertNotNull(customer2);
 
         customerRepository.delete(customer2.getId());
 
-        customers = customerRepository.get();
+        customers = customerRepository.findAll();
         Customer customer3 = findInList(customers, customer1.getFirstname(), customer1.getLastname(), customer1.getPhone(), customer1.getEmail());
         Assert.assertNull(customer3);
     }

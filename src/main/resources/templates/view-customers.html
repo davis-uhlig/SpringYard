@@ -5,13 +5,29 @@
     <title>Title</title>
 </head>
 <body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/view-customers">View Customers</a>
+        <a href="/add-customer">Add a Customer</a>
+    </nav>
     <h1>view the customers here</h1>
-    <div th:each="customer : ${allCustomers}">
-        <a th:href="@{${customer.id}}" th:text="${customer.id}"></a>
-        <p th:text="${customer.firstname}"></p>
-        <p th:text="${customer.lastname}"></p>
-        <p th:text="${customer.phone}"></p>
-        <p th:text="${customer.email}"></p>
+    <div>
+        <table>
+            <tr>
+                <td style="text-decoration:underline;">id</td>
+                <td style="text-decoration:underline;">First Name</td>
+                <td style="text-decoration:underline;">Last Name</td>
+                <td style="text-decoration:underline;">Phone</td>
+                <td style="text-decoration:underline;">Email</td>
+            </tr>
+            <tr  th:each="customer : ${allCustomers}">
+                <td><a th:href="@{${customer.id}}" th:text="${customer.id}"></a></td>
+                <td th:text="${customer.firstname}"></td>
+                <td th:text="${customer.lastname}"></td>
+                <td th:text="${customer.phone}"></td>
+                <td th:text="${customer.email}"></td>
+            </tr>
+        </table>
     </div>
 </body>
 </html>
